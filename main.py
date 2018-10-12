@@ -31,6 +31,8 @@ def make_game():
 
 def main():
     game = make_game()
+    system("clear")
+    print("\n{}\n".format(game))
     game.play()
 
 if (__name__=="__main__"):

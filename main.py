@@ -26,7 +26,7 @@ def make_game():
     """
     print(rules)
     word = hide_answer()
-    guesses = int(input("Enter max number of guesses: "))
+    guesses = int(input("Enter maximum number of wrong guesses: "))
     return Hangman(word, guesses)
 
 def main():

@@ -29,7 +29,7 @@ class Hangman(object):
         return ("Hangman({self._answer}, {self.guesses_left})".format(self = self))
 
     def remaining_guesses(self):
-        print("You have {self.guesses_left} guess(es) left.".format(self=self))
+        print("You have {self.guesses_left} wrong guess(es) left.".format(self=self))
 
 
     ### Game guessing logic ###
@@ -80,7 +80,8 @@ class Hangman(object):
             self.update_word(guess)
         else:
             self.wrong_guess(guess)
-        self.guesses_left -= 1
+            self.guesses_left -= 1
+            self.remaining_guesses()
         # this is where we check if the player has won
         self.update_state()
 
@@ -105,7 +106,6 @@ class Hangman(object):
         guess = self.get_input()
         # update stored guesses, allowed guess counter, check if game over
         self.check_guess(guess)
-        self.remaining_guesses()
 
     def play(self):
         while (not (self.no_guesses_left() or self.player_won())):

@@ -1,5 +1,4 @@
 from hangman import Hangman
-import sys
 from os import system, name
 
 def secret_string():
@@ -31,10 +30,7 @@ def make_game():
     return Hangman(word, guesses)
 
 def main():
-    try:
-        game = Hangman(sys.argv[1], int(sys.argv[2]))
-    except:
-        game = make_game()
+    game = make_game()
     game.play()
 
 if (__name__=="__main__"):

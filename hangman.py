@@ -45,14 +45,14 @@ class Hangman(object):
         Update correctly guessed chars
         '''
         for i in range(len(self._answer)):
-            if guess == self._answer[i]:
+            if guess.lower() == self._answer[i].lower():
                 self.word[i] = guess
 
 
     ### Game checking logic ###
 
     def player_won(self):
-        return (self._answer == ''.join(self.word))
+        return (self._answer.lower() == ''.join(self.word).lower())
 
     def final_result(self):
         if (self.result == GameState.WON):
@@ -76,7 +76,7 @@ class Hangman(object):
         return self.result
 
     def check_guess(self, guess):
-        if guess in self._answer:
+        if guess.lower() in self._answer.lower():
             self.update_word(guess)
         else:
             self.wrong_guess(guess)
@@ -90,10 +90,11 @@ class Hangman(object):
         '''
         guess = str(input("Guess a letter: "))
         # if guess is not suitable
-        while (guess in self.already_guessed or len(guess) != 1 or guess in self.word):
+        while (guess.lower() in self.already_guessed or len(guess) != 1
+                or guess.lower() in [c.lower() for c in self.word]):
             print("Guesses must be one character. Previously submitted guesses will not be counted.")
             guess = str(input("Guess a letter: "))
-        return guess
+        return guess.lower()
 
 
     def guess(self):

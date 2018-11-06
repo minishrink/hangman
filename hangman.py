@@ -9,6 +9,17 @@ class Hangman(object):
 
     UNKNOWN = '_'
 
+    def sanitise(string):
+        '''
+        Don't obscure punctuation, and don't make players guess it
+        '''
+        punctuation = [' ','!','?','\"','\'','.',',','\\',
+                '£','$','%','^','&','*','(',')',':',';','{','}','[',']',
+                '/','|','<','>','+','-','`']
+        clean = [c if c in punctuation else Hangman.UNKNOWN for c in string]
+        return clean
+
+
     ### Object constructors and representations ###
 
     def __init__(self, answer, guesses_allowed):
@@ -18,7 +29,7 @@ class Hangman(object):
         '''
         self.guesses_left = guesses_allowed
         self._answer = answer
-        self.word = [Hangman.UNKNOWN for c in answer]
+        self.word = Hangman.sanitise(answer)
         self.already_guessed = []
         self.result = GameState.IN_PROGRESS
 
